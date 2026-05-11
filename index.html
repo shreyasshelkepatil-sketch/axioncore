@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Axioncore Technologies | Premium Digital Agency</title>
+  <meta name="description" content="Axioncore Technologies is a premium digital product agency building high-performance web applications, native mobile experiences, and scalable enterprise ecosystems.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- CSS VARIABLES & RESET --- */
+    :root {
+      --bg-dark: #07070a;
+      --bg-card: rgba(19, 19, 26, 0.6);
+      --bg-card-hover: rgba(26, 26, 36, 0.8);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #6366f1;
+      --secondary: #a855f7;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+      --glass-bg: rgba(10, 10, 15, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.05);
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    html { 
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- CUSTOM CURSOR --- */
+    @media (pointer: fine) {
+      body { cursor: none; }
+      .cursor-dot, .cursor-outline {
+        position: fixed;
+        top: 0; left: 0; 
+        transform: translate(-50%, -50%);
+        border-radius: 50%; 
+        z-index: 10000; 
+        pointer-events: none;
+      }
+      .cursor-dot { 
+        width: 6px; 
+        height: 6px; 
+        background-color: var(--primary); 
+      }
+      .cursor-outline {
+        width: 36px; 
+        height: 36px;
+        border: 1px solid rgba(168, 85, 247, 0.4);
+        transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
+      }
+      .cursor-outline.hovering { 
+        width: 56px; 
+        height: 56px; 
+        background-color: rgba(99, 102, 241, 0.05); 
+        border-color: var(--primary); 
+      }
+    }
+
+    /* --- TYPOGRAPHY & UTILITIES --- */
+    .container { 
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto; 
+      padding: 0 clamp(1.2rem, 5vw, 2rem); 
+    }
+    
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+
+    .section { 
+      padding: clamp(4rem, 10vw, 8rem) 0; 
+    }
+    
+    .dark-section { 
+      background: rgba(255, 255, 255, 0.01); 
+      border-top: 1px solid var(--border-color); 
+      border-bottom: 1px solid var(--border-color); 
+    }
+    
+    .section-header { 
+      text-align: center; 
+      margin-bottom: clamp(2.5rem, 6vw, 4rem); 
+    }
+    
+    .section-header h2 { 
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem; 
+      letter-spacing: -1px; 
+      line-height: 1.2;
+    }
+    
+    .section-header p { 
+      color: var(--text-muted); 
+      font-size: clamp(1rem, 2vw, 1.15rem); 
+      max-width: 650px; 
+      margin: 0 auto; 
+    }
+
+    /* --- SCROLL PROGRESS BAR --- */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0; 
+      height: 3px;
+      background: var(--gradient); 
+      z-index: 9999; 
+      width: 0%;
+    }
+
+    /* --- NAVBAR & MOBILE MENU --- */
+    header { 
+      position: fixed;
+      width: 100%; 
+      top: 0; 
+      z-index: 1000; 
+      transition: all 0.3s ease; 
+      padding: 1.5rem 0;
+    }
+    
+    header.scrolled { 
+      padding: 1rem 0; 
+      background: rgba(7, 7, 10, 0.85); 
+      backdrop-filter: blur(12px); 
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nav-container { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    
+    .logo { 
+      font-size: 1.5rem; 
+      font-weight: 800; 
+      letter-spacing: -0.5px;
+      z-index: 1001;
+      position: relative;
+    }
+    
+    .logo span { color: var(--primary); }
+    
+    .nav-links { 
+      display: flex; 
+      list-style: none; 
+      gap: 2.5rem; 
+      align-items: center;
+    }
+    
+    .nav-links a { 
+      color: var(--text-main); 
+      text-decoration: none; 
+      font-weight: 500; 
+      transition: color 0.3s ease; 
+      font-size: 0.95rem;
+    }
+    
+    .nav-links a:hover { color: var(--secondary); }
+    
+    .btn-nav { 
+      background: rgba(255, 255, 255, 0.05); 
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px; 
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      transition: all 0.3s ease !important; 
+    }
+    
+    .btn-nav:hover { 
+      background: var(--text-main);
+      color: var(--bg-dark) !important; 
+    }
+
+    .menu-toggle { 
+      display: none; 
+      flex-direction: column; 
+      cursor: pointer; 
+      gap: 5px; 
+      z-index: 1001;
+      border: none;
+      background: transparent;
+      padding: 0.5rem;
+    }
+    
+    .menu-toggle span { 
+      width: 28px; 
+      height: 2px; 
+      background-color: var(--text-main); 
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      
+      .nav-links {
+        position: fixed; 
+        top: 0; right: -100%; 
+        width: 100%; height: 100vh;
+        background: rgba(7, 7, 10, 0.98); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+      
+      .nav-links.active { right: 0; }
+      .nav-links a { font-size: 1.5rem; }
+      
+      .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+
+    /* --- BUTTONS --- */
+    .btn-primary { 
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem; 
+      border-radius: 50px; 
+      font-weight: 600; 
+      text-decoration: none; 
+      transition: all 0.3s ease; 
+      background: var(--gradient); 
+      color: #fff;
+      border: none; 
+      font-size: 1rem; 
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .btn-primary:hover::after { opacity: 1; }
+    
+    .btn-primary:hover { 
+      box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.5);
+      transform: translateY(-2px); 
+    }
+
+    /* --- BACK TO TOP BUTTON --- */
+    #back-to-top {
+      position: fixed;
+      bottom: clamp(20px, 4vw, 30px); 
+      right: clamp(20px, 4vw, 30px); 
+      width: 45px; height: 45px;
+      background: var(--glass-bg); 
+      border: 1px solid var(--border-color); 
+      backdrop-filter: blur(10px);
+      border-radius: 50%; color: white;
+      font-size: 1.2rem; cursor: pointer;
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s ease; 
+      z-index: 999; 
+      display: flex; align-items: center; justify-content: center;
+    }
+    
+    #back-to-top.show { opacity: 1; pointer-events: all; }
+    
+    #back-to-top:hover { 
+      transform: translateY(-5px);
+      background: var(--gradient);
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(99,102,241,0.3); 
+    }
+
+    /* --- HERO SECTION --- */
+    .hero { 
+      height: 100vh;
+      min-height: 600px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-align: center; 
+      position: relative; 
+      overflow: hidden; 
+      padding-top: 5rem;
+    }
+    
+    .video-background {
+      position: absolute; 
+      top: 0; left: 0; 
+      width: 100%; height: 100%;
+      z-index: -3; 
+      background-color: var(--bg-dark);
+    }
+    
+    .video-background video {
+      width: 100%; height: 100%; 
+      object-fit: cover; 
+      opacity: 0.25;
+      filter: grayscale(80%) contrast(110%);
+    }
+    
+    .video-overlay {
+      position: absolute;
+      top: 0; left: 0; 
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(7, 7, 10, 0.3) 0%, rgba(7, 7, 10, 0.8) 70%, var(--bg-dark) 100%);
+      z-index: -2;
+    }
+    
+    .hero-bg-glow { 
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); 
+      width: 60vw; height: 60vw; 
+      max-width: 800px; max-height: 800px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(7,7,10,0) 60%); 
+      z-index: -1; filter: blur(60px);
+    }
+    
+    .hero-content { position: relative; z-index: 1; padding: 0 1rem; width: 100%; }
+    
+    .hero h1 { 
+      font-size: clamp(2.2rem, 8vw, 5.5rem); 
+      line-height: 1.1; 
+      margin-bottom: 1.5rem; 
+      letter-spacing: -2px;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+    }
+    
+    .hero p { 
+      font-size: clamp(1rem, 2.5vw, 1.15rem); 
+      color: var(--text-muted); 
+      max-width: 650px;
+      margin: 0 auto 2.5rem; 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+    }
+
+    /* --- MARQUEE --- */
+    .marquee-container { 
+      overflow: hidden;
+      padding: 2.5rem 0; 
+      border-top: 1px solid var(--border-color); 
+      border-bottom: 1px solid var(--border-color); 
+      background: rgba(255,255,255,0.01); 
+      position: relative; 
+      z-index: 2;
+    }
+    
+    .marquee-container p { 
+      text-align: center; 
+      font-size: 0.75rem; 
+      font-weight: 600; 
+      letter-spacing: 3px; 
+      color: var(--text-muted); 
+      margin-bottom: 2rem;
+    }
+    
+    .marquee-track { 
+      display: flex; 
+      gap: clamp(2rem, 5vw, 4rem); 
+      width: max-content; 
+      animation: scroll 40s linear infinite; 
+      align-items: center;
+    }
+    
+    .marquee-track span { 
+      font-size: clamp(1.2rem, 3vw, 1.5rem); 
+      font-weight: 700; 
+      color: rgba(255,255,255,0.15); 
+      transition: color 0.3s;
+    }
+    
+    .marquee-track span:hover { color: var(--text-main); }
+    
+    @keyframes scroll { 
+      to { transform: translateX(calc(-50% - (clamp(2rem, 5vw, 4rem) / 2))); } 
+    }
+
+    /* --- ABOUT SECTION --- */
+    .about-grid { 
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: clamp(2rem, 6vw, 4rem); 
+      align-items: center; 
+    }
+    
+    .about-content h3 { font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 1.5rem; }
+    
+    .about-content p { 
+      color: var(--text-muted); 
+      font-size: clamp(1rem, 2vw, 1.05rem); 
+      margin-bottom: 1.5rem; 
+    }
+    
+    .about-image-wrapper {
+      border-radius: 24px; 
+      overflow: hidden; 
+      position: relative; 
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border-color);
+      width: 100%;
+    }
+    
+    .about-image-wrapper img {
+      width: 100%; height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.7s ease;
+    }
+    
+    .about-image-wrapper:hover img { transform: scale(1.05); }
+
+    /* --- SERVICES --- */
+    .services-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: clamp(1.5rem, 4vw, 2rem); 
+    }
+    
+    .service-card { 
+      background: var(--bg-card); 
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: clamp(1.8rem, 4vw, 2.5rem); 
+      border-radius: 20px; 
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s ease; 
+      position: relative; 
+      overflow: hidden; 
+    }
+    
+    .service-card:hover { 
+      transform: translateY(-8px); 
+      background: var(--bg-card-hover); 
+      border-color: rgba(99,102,241,0.3); 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+    }
+    
+    .card-icon { 
+      font-size: 2.5rem; 
+      margin-bottom: 1.2rem; 
+      background: var(--gradient); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    .service-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+    
+    .service-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+    /* --- TECH STACK --- */
+    .tech-grid { 
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 1rem; 
+      max-width: 850px; 
+      margin: 0 auto; 
+    }
+    
+    .tech-item { 
+      padding: 0.8rem 1.8rem;
+      background: var(--bg-card); 
+      border: 1px solid var(--border-color); 
+      border-radius: 50px; 
+      font-weight: 500; 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      transition: all 0.3s;
+    }
+    
+    @media (prefers-reduced-motion: no-preference) {
+      .tech-item { animation: float 5s ease-in-out infinite; }
+      .tech-item:nth-child(even) { animation-delay: 1.5s; }
+    }
+    
+    .tech-item:hover { 
+      color: var(--text-main); 
+      border-color: var(--primary); 
+      background: rgba(99,102,241,0.05); 
+      transform: scale(1.05); 
+      animation-play-state: paused;
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15); 
+    }
+
+    /* --- CAREERS SECTION --- */
+    .careers-grid { 
+      display: grid;
+      /* INCREASED MINIMUM WIDTH TO 360PX TO GIVE EMAIL MORE ROOM */
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); 
+      gap: 2rem; 
+    }
+    
+    .job-card { 
+      background: var(--bg-card); 
+      padding: clamp(1.5rem, 4vw, 2.5rem); 
+      border-radius: 20px;
+      border: 1px solid var(--border-color); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1.2rem; 
+      position: relative; 
+      overflow: hidden;
+    }
+    
+    .job-card::before { 
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; 
+      background: var(--gradient); opacity: 0; transition: opacity 0.3s; 
+    }
+    
+    .job-card:hover { 
+      transform: translateY(-5px); 
+      border-color: rgba(99,102,241,0.2); 
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .job-card:hover::before { opacity: 1; }
+    
+    .job-tags { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    
+    .job-tag { 
+      background: rgba(99,102,241,0.1); 
+      color: var(--primary); 
+      padding: 0.3rem 0.8rem; 
+      border-radius: 6px; 
+      font-size: 0.75rem; 
+      font-weight: 600;
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+    }
+    
+    .job-tag.internship { 
+      background: rgba(168, 85, 247, 0.1); 
+      color: var(--secondary);
+    }
+    
+    .job-title { font-size: clamp(1.3rem, 3vw, 1.5rem); color: var(--text-main); line-height: 1.3; }
+    
+    .job-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.5rem; }
+    
+    .apply-box {
+      margin-top: auto;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .apply-box:hover { 
+      background: rgba(99,102,241,0.05); 
+      border-color: rgba(99,102,241,0.3);
+    }
+    
+    .apply-box span.title {
+      display: block; font-weight: 700; font-size: 0.9rem;
+      color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 0.4rem;
+    }
+    
+    .apply-box a.email {
+      font-weight: 600; 
+      /* Allowed font to scale slightly smaller on tiny screens */
+      font-size: clamp(0.85rem, 3.5vw, 1rem); 
+      color: var(--text-main); 
+      text-decoration: none;
+      transition: color 0.3s;
+      overflow-wrap: anywhere; /* Breaks cleanly only if absolutely zero room left */
+    }
+    
+    .apply-box a.email:hover { color: var(--primary); }
+    
+    .job-location { 
+      font-size: 0.9rem; color: var(--text-muted); 
+      display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;
+    }
+
+    /* --- PROCESS SECTION --- */
+    .process-grid { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); 
+      gap: 2.5rem; 
+    }
+    
+    .process-item { 
+      padding: 1.5rem; 
+      border-left: 2px solid rgba(255,255,255,0.05);
+      transition: all 0.3s; 
+    }
+    
+    .process-item:hover { 
+      border-color: var(--primary); 
+      background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+    }
+    
+    .step-num { 
+      display: block; font-size: 3.5rem; font-weight: 800; 
+      color: rgba(255,255,255,0.05); margin-bottom: -1rem; line-height: 1;
+    }
+    
+    .process-item h3 { font-size: 1.3rem; margin-bottom: 0.8rem; }
+    
+    .process-item p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* --- TESTIMONIALS --- */
+    .testimonials-grid { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); 
+      gap: 2rem; 
+    }
+    
+    .testimonial-card { 
+      background: var(--bg-card); 
+      padding: clamp(1.5rem, 4vw, 2.5rem); 
+      border-radius: 20px;
+      border: 1px solid var(--border-color); 
+      position: relative; 
+      transition: all 0.3s ease;
+    }
+    
+    .testimonial-card:hover { 
+      border-color: rgba(168, 85, 247, 0.3); 
+      transform: translateY(-5px);
+    }
+    
+    .quote-icon { 
+      font-size: 4rem; color: rgba(255,255,255,0.03); 
+      position: absolute; top: 1rem; right: 2rem; 
+      line-height: 1; font-family: Georgia, serif;
+    }
+    
+    .testimonial-card p { 
+      font-size: 1rem; color: var(--text-main); 
+      font-style: italic; margin-bottom: 1.5rem; 
+      position: relative; z-index: 1;
+    }
+    
+    .client-info h4 { color: var(--primary); margin-bottom: 0.1rem; font-size: 1.1rem; }
+    
+    .client-info span { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* --- CONTACT CARDS --- */
+    .contact-info { max-width: 850px; margin: 0 auto; text-align: center; }
+    
+    .contact-info h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1.2rem; line-height: 1.1; }
+    
+    .contact-info p { color: var(--text-muted); margin-bottom: 3rem; font-size: 1.05rem; }
+    
+    .contact-cards-container { 
+      display: grid;
+      /* INCREASED MINIMUM WIDTH TO 380PX TO GIVE EMAIL MORE ROOM */
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+      gap: 1.5rem; 
+    }
+    
+    .contact-card { 
+      background: rgba(255,255,255,0.02); 
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.2rem, 3vw, 2rem); 
+      border-radius: 16px; 
+      border: 1px solid var(--border-color); 
+      display: flex;
+      align-items: center; 
+      gap: 1.2rem; 
+      transition: background 0.3s; 
+      text-align: left; 
+    }
+    
+    .contact-card:hover { 
+      background: rgba(255,255,255,0.05); 
+      border-color: rgba(99,102,241,0.3);
+    }
+    
+    .contact-icon { 
+      width: 45px; height: 45px; border-radius: 50%; 
+      background: rgba(99,102,241,0.1); display: flex; 
+      align-items: center; justify-content: center;
+      font-size: 1.2rem; color: var(--primary); flex-shrink: 0; 
+    }
+
+    /* --- FOOTER --- */
+    footer { 
+      padding: 5rem 0 2rem;
+      border-top: 1px solid var(--border-color); 
+      background: #040406; 
+    }
+    
+    .footer-grid { 
+      display: grid; 
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem; margin-bottom: 3rem; 
+    }
+    
+    .footer-brand p { color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem; max-width: 300px; }
+    
+    .footer-col h4 { font-size: 1.1rem; margin-bottom: 1.2rem; color: var(--text-main); }
+    
+    .footer-col ul { list-style: none; }
+    
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    
+    .footer-col ul li a { 
+      color: var(--text-muted); text-decoration: none; 
+      font-size: 0.95rem; transition: color 0.3s;
+    }
+    
+    .footer-col ul li a:hover { color: var(--primary); }
+    
+    .newsletter-box { display: flex; margin-top: 1rem; width: 100%; }
+    
+    .newsletter-box input { 
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid var(--border-color); 
+      padding: 0.8rem 1rem;
+      border-radius: 8px 0 0 8px; color: #fff; 
+      width: 100%; outline: none;
+      font-size: 0.9rem;
+      transition: border-color 0.3s;
+    }
+    
+    .newsletter-box input:focus { border-color: var(--primary); }
+    
+    .newsletter-box button { 
+      background: var(--primary); border: none; padding: 0 1.2rem; 
+      border-radius: 0 8px 8px 0; color: #fff; font-weight: 600; cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .newsletter-box button:hover { background: var(--secondary); }
+    
+    .footer-bottom { 
+      display: flex; justify-content: space-between; align-items: center; 
+      padding-top: 2rem; border-top: 1px solid var(--border-color); 
+      flex-wrap: wrap; gap: 1rem; 
+    }
+    
+    .footer-bottom p { color: var(--text-muted); font-size: 0.85rem; }
+    
+    .social-links { display: flex; gap: 1rem; }
+    
+    .social-links a { 
+      color: var(--text-muted); text-decoration: none; 
+      font-size: 1.1rem; transition: color 0.3s; 
+    }
+    
+    .social-links a:hover { color: var(--text-main); }
+
+    /* --- MOBILE RESPONSIVE OVERRIDES --- */
+    @media (max-width: 992px) { 
+      .about-grid { grid-template-columns: 1fr; } 
+      .about-image-wrapper { order: -1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; } 
+    }
+    
+    @media (max-width: 768px) {
+      /* Force Center Alignment on Mobile */
+      .about-content, 
+      .section-header { text-align: center !important; }
+      
+      .contact-card { 
+        flex-direction: column; 
+        text-align: center; 
+        justify-content: center;
+        padding: 2rem 1.5rem; 
+      }
+      
+      .footer-grid { text-align: center; }
+      
+      .footer-brand .logo, 
+      .footer-brand p { margin: 0 auto 1rem auto; text-align: center; }
+      
+      .newsletter-box { max-width: 400px; margin: 1rem auto; }
+      
+      .footer-bottom { justify-content: center; text-align: center; }
+      .social-links { justify-content: center; margin-top: 0.5rem; }
+    }
+
+    @media (max-width: 576px) { 
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; } 
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .reveal { 
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+    }
+    
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <div id="progress-bar"></div>
+
+  <button id="back-to-top" aria-label="Scroll to top" title="Go to top">↑</button>
+
+  <header id="navbar">
+    <div class="nav-container">
+      <div class="logo">Axioncore<span>.</span></div>
+      
+      <button class="menu-toggle" id="mobile-menu" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about" class="hover-target">About</a></li>
+          <li><a href="#services" class="hover-target">Expertise</a></li>
+          <li><a href="#careers" class="hover-target">Careers</a></li>
+          <li><a href="#contact" class="btn-nav hover-target">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="video-background">
+      <video autoplay loop muted playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-screencast-883-large.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-overlay"></div>
+    <div class="hero-bg-glow"></div>
+
+    <div class="hero-content reveal active">
+      <h1>Architecting the <br><span class="gradient-text">Digital Frontier.</span></h1>
+      <p>We are a premium digital product agency building high-performance web applications, native mobile experiences, and scalable enterprise ecosystems.</p>
+      <div style="margin-top: 2rem;">
+        <a href="#about" class="btn-primary hover-target">Discover More</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-container">
+    <p>TRUSTED BY VISIONARY TEAMS AT</p>
+    <div class="marquee-track">
+      <span>✦ TRUEVENDOR</span>
+      <span>✦ QUANTUM LABS</span>
+      <span>✦ NEXUS PAY</span>
+      <span>✦ SYNTHESIS</span>
+      <span>✦ TRUEVENDOR</span>
+      <span>✦ QUANTUM LABS</span>
+      <span>✦ NEXUS PAY</span>
+      <span>✦ SYNTHESIS</span>
+    </div>
+  </div>
+
+  <section id="about" class="section">
+    <div class="container reveal">
+      <div class="about-grid">
+        <div class="about-image-wrapper">
+          <img src="sfsfsf.png" alt="Axioncore Engineering Team Collaborating">
+        </div>
+        <div class="about-content">
+          <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+            <h2>Who <span class="gradient-text">We Are</span></h2>
+          </div>
+          <p>At Axioncore Technologies, we bridge the gap between complex engineering and elegant design. Founded by industry veterans, our mission is to empower forward-thinking brands with robust, scalable digital solutions.</p>
+          <p>We don't just write code; we build the core infrastructure of your digital business. From seamless frontend interfaces to deeply optimized backend databases, our team is committed to delivering unparalleled technical excellence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section dark-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our <span class="gradient-text">Disciplines</span></h2>
+        <p>End-to-end digital capabilities designed to push boundaries and drive measurable business outcomes.</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card reveal hover-target">
+          <div class="card-icon">⚙️</div>
+          <h3>Platform Engineering</h3>
+          <p>Complex, high-load web applications and SaaS platforms built with modern, composable architectures ensuring scale and security.</p>
+        </div>
+        <div class="service-card reveal hover-target" style="transition-delay: 0.1s;">
+          <div class="card-icon">📱</div>
+          <h3>Native Ecosystems</h3>
+          <p>Award-winning iOS and Android experiences featuring fluid animations, offline-first logic, and deep OS integration.</p>
+        </div>
+        <div class="service-card reveal hover-target" style="transition-delay: 0.2s;">
+          <div class="card-icon">🎨</div>
+          <h3>Product Design (UX/UI)</h3>
+          <p>Data-informed user interfaces that blend striking aesthetics with frictionless user journeys to maximize conversion rates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our <span class="gradient-text">Technology Stack</span></h2>
+        <p>We leverage modern, battle-tested technologies to build products that outlast the hype cycle.</p>
+      </div>
+      <div class="tech-grid reveal">
+        <div class="tech-item hover-target">Flutter</div>
+        <div class="tech-item hover-target">API Integration</div>
+        <div class="tech-item hover-target">TypeScript</div>
+        <div class="tech-item hover-target">Node.js</div>
+        <div class="tech-item hover-target">Figma</div>
+        <div class="tech-item hover-target">React / Next.js</div>
+        <div class="tech-item hover-target">PostgreSQL</div>
+        <div class="tech-item hover-target">AWS Cloud</div>
+        <div class="tech-item hover-target">Swift / Kotlin</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="careers" class="section dark-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Join the <span class="gradient-text">Core Team</span></h2>
+        <p>We are always on the lookout for bright, ambitious talent to build the future of software with us. Check out our open roles.</p>
+      </div>
+      
+      <div class="careers-grid">
+        <div class="job-card reveal hover-target">
+          <div class="job-tags">
+            <span class="job-tag internship">Internship</span>
+            <span class="job-tag">Engineering</span>
+          </div>
+          <h3 class="job-title">Flutter Developer Intern</h3>
+          <p class="job-desc">Assist in building high-performance, cross-platform mobile applications. Work with Dart, state management, and API integrations.</p>
+          <div class="job-location">📍 Remote</div>
+          
+          <div class="apply-box">
+            <span class="title">Send your CV to</span>
+            <a href="mailto:axioncoretechnologies@gmail.com" class="email">axioncoretechnologies@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="job-card reveal hover-target" style="transition-delay: 0.1s;">
+          <div class="job-tags">
+            <span class="job-tag internship">Internship</span>
+            <span class="job-tag">Engineering</span>
+          </div>
+          <h3 class="job-title">Backend Developer Intern</h3>
+          <p class="job-desc">Dive into server-side logic and database architecture. Work with Node.js, Express, PostgreSQL, and RESTful APIs.</p>
+          <div class="job-location">📍 Remote</div>
+          
+          <div class="apply-box">
+            <span class="title">Send your CV to</span>
+            <a href="mailto:axioncoretechnologies@gmail.com" class="email">axioncoretechnologies@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="job-card reveal hover-target" style="transition-delay: 0.2s;">
+          <div class="job-tags">
+            <span class="job-tag internship">Internship</span>
+            <span class="job-tag">Design</span>
+          </div>
+          <h3 class="job-title">UI/UX Design Intern</h3>
+          <p class="job-desc">Help craft intuitive user journeys and stunning visual interfaces. Proficiency in Figma and modern typography required.</p>
+          <div class="job-location">📍 Remote</div>
+          
+          <div class="apply-box">
+            <span class="title">Send your CV to</span>
+            <a href="mailto:axioncoretechnologies@gmail.com" class="email">axioncoretechnologies@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>The <span class="gradient-text">Axioncore Process</span></h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-item reveal">
+          <span class="step-num">01</span>
+          <h3>Strategy & Discovery</h3>
+          <p>We align our technical architecture with your core business metrics and user demographics.</p>
+        </div>
+        <div class="process-item reveal" style="transition-delay: 0.1s;">
+          <span class="step-num">02</span>
+          <h3>Sprint Development</h3>
+          <p>Agile, transparent, and rapid. You get bi-weekly staging links to interact with the product.</p>
+        </div>
+        <div class="process-item reveal" style="transition-delay: 0.2s;">
+          <span class="step-num">03</span>
+          <h3>Scale & Maintain</h3>
+          <p>Post-launch, we monitor analytics, optimize server loads, and iterate based on feedback.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Client <span class="gradient-text">Perspectives</span></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal hover-target">
+          <div class="quote-icon">"</div>
+          <p>Axioncore took our fractured legacy system and unified it into a sleek, modern app. Our user retention doubled in three months.</p>
+          <div class="client-info">
+            <h4>Sarah Jenkins</h4>
+            <span>CTO @ Nexus Labs</span>
+          </div>
+        </div>
+        <div class="testimonial-card reveal hover-target" style="transition-delay: 0.2s;">
+          <div class="quote-icon">"</div>
+          <p>The technical depth of their team is unmatched. They foresaw scaling issues we hadn't even considered and bulletproofed our launch.</p>
+          <div class="client-info">
+            <h4>David Chen</h4>
+            <span>Founder @ Quantum Pay</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container reveal">
+      <div class="contact-info">
+        <h2>Let's build something <span class="gradient-text">iconic.</span></h2>
+        <p>Tell us about your technical challenges, or reach out regarding our open positions. Our team will get back to you within 24 hours.</p>
+        
+        <div class="contact-cards-container">
+          <div class="contact-card hover-target">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4 style="color: var(--text-main); margin-bottom: 0.2rem;">Email Us</h4>
+              <a href="mailto:axioncoretechnologies@gmail.com" style="margin: 0; font-size: clamp(0.85rem, 2.5vw, 1.1rem); font-weight: 700; color: var(--primary); text-decoration: none; overflow-wrap: anywhere;">
+                axioncoretechnologies@gmail.com
+              </a>
+            </div>
+          </div>
+          <div class="contact-card hover-target">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4 style="color: var(--text-main); margin-bottom: 0.2rem;">Our Address</h4>
+              <p style="margin: 0; font-size: 0.95rem;">Patel Nagar, Nagpur-440013, Maharashtra</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">Axioncore<span>.</span></div>
+          <p>Elevating digital standards through elite software engineering and human-centric design.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about" class="hover-target">About Us</a></li>
+            <li><a href="#services" class="hover-target">Capabilities</a></li>
+            <li><a href="#careers" class="hover-target">Careers</a></li>
+            <li><a href="#contact" class="hover-target">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#" class="hover-target">Privacy Policy</a></li>
+            <li><a href="#" class="hover-target">Terms of Service</a></li>
+            <li><a href="#" class="hover-target">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Get the latest tech insights delivered to your inbox.</p>
+          <form class="newsletter-box" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+            <input type="email" placeholder="Email address" required class="hover-target" aria-label="Email Address">
+            <button type="submit" class="hover-target" aria-label="Subscribe">→</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Axioncore Technologies. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" class="hover-target" aria-label="Twitter">Tw</a>
+          <a href="#" class="hover-target" aria-label="LinkedIn">In</a>
+          <a href="#" class="hover-target" aria-label="GitHub">Gh</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    const navItems = document.querySelectorAll('.nav-links li a');
+
+    mobileMenu.addEventListener('click', () => {
+      const isExpanded = mobileMenu.getAttribute('aria-expanded') === 'true' || false;
+      mobileMenu.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden'; 
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        mobileMenu.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    const hoverTargets = document.querySelectorAll('.hover-target, button, a');
+
+    if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorOutline) {
+      window.addEventListener('mousemove', (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+        
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+        
+        cursorOutline.animate({
+          left: `${posX}px`,
+          top: `${posY}px`
+        }, { duration: 300, fill: "forwards" });
+      });
+
+      hoverTargets.forEach(target => {
+        target.addEventListener('mouseenter', () => cursorOutline.classList.add('hovering'));
+        target.addEventListener('mouseleave', () => cursorOutline.classList.remove('hovering'));
+      });
+    }
+
+    const backToTopBtn = document.getElementById('back-to-top');
+    const navbar = document.getElementById('navbar');
+    const progressBar = document.getElementById("progress-bar");
+    let isScrolling = false;
+
+    window.addEventListener('scroll', () => {
+      if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          progressBar.style.width = scrolled + "%";
+
+          if (window.scrollY > 50) navbar.classList.add('scrolled');
+          else navbar.classList.remove('scrolled');
+
+          if (window.scrollY > 500) backToTopBtn.classList.add('show');
+          else backToTopBtn.classList.remove('show');
+          
+          isScrolling = false;
+        });
+        isScrolling = true;
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      });
+    }, revealOptions);
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
+  </script>
+</body>
+</html>
