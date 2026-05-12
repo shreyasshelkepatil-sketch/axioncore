@@ -132,19 +132,6 @@
     }
     .tech-item:hover { color: var(--text-main); border-color: var(--primary); background: rgba(99,102,241,0.1); transform: scale(1.08) translateY(-5px); animation-play-state: paused; box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2); }
 
-    /* --- CAREERS --- */
-    .careers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 2.5rem; }
-    .job-card { background: var(--bg-card); padding: clamp(2rem, 4vw, 2.5rem); border-radius: 24px; border: 1px solid var(--border-color); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; gap: 1.5rem; position: relative; overflow: hidden; }
-    .job-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradient); opacity: 0; transition: opacity 0.4s ease; }
-    .job-card:hover { transform: translateY(-8px); border-color: rgba(99,102,241,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.3); background: var(--bg-card-hover); }
-    .job-card:hover::before { opacity: 1; }
-    .job-tags { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .job-tag { background: rgba(99,102,241,0.15); color: var(--primary); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-    .job-tag.internship { background: rgba(168, 85, 247, 0.15); color: var(--secondary); }
-    .job-title { font-size: clamp(1.4rem, 3vw, 1.6rem); color: var(--text-main); line-height: 1.3; font-weight: 700;}
-    .apply-box { margin-top: auto; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; text-align: center; transition: all 0.4s ease; }
-    .apply-box:hover { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.4); box-shadow: inset 0 0 20px rgba(99,102,241,0.05); }
-
     /* --- PROCESS SECTION (UPGRADED EDITORIAL TYPOGRAPHY) --- */
     .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 3rem; }
     .process-item { padding: 2.5rem 2rem; border-radius: 24px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.01); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; z-index: 1; }
@@ -173,12 +160,6 @@
     .contact-method-icon { width: 60px; height: 60px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem; box-shadow: inset 0 0 20px rgba(99,102,241,0.1); }
     
     .contact-form { background: var(--bg-card); border: 1px solid var(--border-color); padding: clamp(2rem, 5vw, 3.5rem); border-radius: 30px; display: flex; flex-direction: column; gap: 1.8rem; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
-    .form-group { display: flex; flex-direction: column; gap: 0.6rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
-    .form-group label { font-size: 0.9rem; color: var(--text-muted); margin-left: 0.5rem; font-weight: 500; }
-    .form-group input, .form-group textarea { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 1.2rem 1.5rem; border-radius: 16px; color: var(--text-main); font-family: 'Outfit', sans-serif; font-size: 1.05rem; outline: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); background: rgba(255,255,255,0.06); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), inset 0 0 10px rgba(0,0,0,0.5); transform: translateY(-2px); }
-    .form-group textarea { resize: vertical; min-height: 150px; }
 
     /* --- FOOTER --- */
     footer { padding: 6rem 0 2rem; border-top: 1px solid var(--border-color); background: #030305; }
@@ -196,7 +177,6 @@
     /* --- RESPONSIVE --- */
     @media (max-width: 992px) { 
       .contact-layout { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; } 
     }
     @media (max-width: 768px) {
@@ -416,27 +396,18 @@
           </div>
         </div>
 
-        <form id="contactForm" class="contact-form hover-target">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name *</label>
-              <input type="text" id="name" required placeholder="John Doe">
-            </div>
-            <div class="form-group">
-              <label for="email">Work Email *</label>
-              <input type="email" id="email" required placeholder="john@company.com">
-            </div>
+        <div class="contact-form hover-target" style="text-align: center; justify-content: center; padding: clamp(3rem, 6vw, 4.5rem);">
+          <div style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
+            <i class="fa-solid fa-clipboard-list" style="font-size: 3.5rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 10px rgba(99,102,241,0.2));"></i>
           </div>
-          <div class="form-group">
-            <label for="company">Company Name</label>
-            <input type="text" id="company" placeholder="Acme Corp">
-          </div>
-          <div class="form-group">
-            <label for="message">Project Details *</label>
-            <textarea id="message" required placeholder="Tell us about your technical challenges and goals..."></textarea>
-          </div>
-          <button type="submit" class="btn-primary" style="margin-top: 1rem; width: 100%;">Submit Inquiry</button>
-        </form>
+          <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-main); font-weight: 700;">Project Inquiry</h3>
+          <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
+            Tell us about your technical challenges and goals. Click below to fill out our secure project application form, and our lead engineers will review your scope.
+          </p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSesh0ZTqs5sSvaGqDHojlGCzkqK7kNnrGQ_bCeWaLnQQH7NEQ/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%;">
+            Open Application Form <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 10px; font-size: 0.9rem;"></i>
+          </a>
+        </div>
 
       </div>
     </div>
@@ -531,7 +502,6 @@
         isScrolling = true;
       }
     });
-
     backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     // Scroll Reveal Intersection Observer
@@ -544,20 +514,6 @@
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
     document.querySelectorAll('.reveal').forEach(el => revealOnScroll.observe(el));
-
-    // Form Submission UI Simulation
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      const originalText = btn.innerText;
-      btn.innerText = 'Message Sent Successfully!';
-      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)'; 
-      e.target.reset();
-      setTimeout(() => {
-        btn.innerText = originalText;
-        btn.style.background = '';
-      }, 4000);
-    });
   </script>
 </body>
 </html>
